@@ -49,7 +49,7 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                     st.info("🔓 SECURITY CHECK REQUIRED: Click the validation link below to verify your bandwidth and unlock your download stream!")
                     
                     # Your active monetization link
-                    adsterra_money_link = "https://highperformanceformat.com"
+                    adsterra_money_link = "https://www.effectivecpmnetwork.com/m7y1p4z0?key=837524906cbad9df906a2cb5af217894"
                     
                     st.markdown(
                         f"""
