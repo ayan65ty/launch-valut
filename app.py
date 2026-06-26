@@ -3,7 +3,7 @@ import yt_dlp
 import time
 from twilio.rest import Client
 
-# 🔑 YOUR LIVE TWILIO CONFIGURATION KEYS
+# 🔑 YOUR LIVE FULLY-CONFIGURED TWILIO KEYS
 TWILIO_ACCOUNT_SID = "AC3e1ae3aa0ee793ec4dfa447e7c04a969"
 TWILIO_AUTH_TOKEN = "13533aa65d3d2d562732892c6092313a"
 YOUR_PERSONAL_PHONE = "+2348101607576" 
@@ -46,44 +46,26 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                     st.success(f"🎉 Success! Found: {video_title}")
                     send_whatsapp_link(video_title, direct_download_url)
                     
-                    # 💵 PREMIUM ACCELERATOR HEADER
-                    st.warning("🚀 SERVER SPEED UNCAP: Click the accelerator button below to support our servers and unlock maximum file speeds!")
-                    
-                    # YOUR ACTIVE SMARTLINK LINK
-                    smartlink_url = "https://highperformanceformat.com" # Replace with your real SmartLink if different
-                    
-                    # The Ad Trigger Button
-                    st.markdown(
-                        f"""
-                        <div style="text-align:center; margin-bottom:15px;">
-                            <a href="{smartlink_url}" target="_blank">
-                                <button style="width:100%; background-color:#ef4444; color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer;">
-                                    💥 CLICK TO UNCAP DOWNLOAD SPEED (AD)
-                                </button>
-                            </a>
-                        </div>
-                        """, 
-                        unsafe_allow_html=True
-                    )
-                    
                     # ⏱️ THE LIVE 5-SECOND COUNTDOWN CLOCK
                     countdown_placeholder = st.empty()
                     for seconds_left in range(5, 0, -1):
                         countdown_placeholder.info(f"⏳ Generating secure file storage links... Please wait {seconds_left} seconds.")
                         time.sleep(1)
                     
-                    # Remove the countdown message and print final download button
                     countdown_placeholder.empty()
                     st.success("✅ Secure file link ready below!")
                     
+                    # 💵 YOUR ADSTERRA SMARTLINK REVENUE LINK
+                    adsterra_money_link = "https://highperformanceformat.com"
+                    
+                    # THE ONE-CLICK BRIDGE BUTTON: Opens Adsterra in a new tab, and downloads the file instantly!
                     st.markdown(
                         f"""
                         <div style="text-align:center;">
-                            <a href='{direct_download_url}' target='_blank'>
-                                <button style='width:100%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;'>
-                                    📥 CLICK HERE TO SAVE / DOWNLOAD FILE
-                                </button>
-                            </a>
+                            <button onclick="window.open('{adsterra_money_link}', '_blank'); window.location.href='{direct_download_url}';" 
+                                    style="width:100%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer;">
+                                📥 CLICK HERE TO SAVE / DOWNLOAD FILE
+                            </button>
                         </div>
                         """, 
                         unsafe_allow_html=True
