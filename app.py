@@ -17,6 +17,10 @@ st.markdown("<h3 style='text-align: center; color: #64748b; font-size: 14px;'>Th
 
 st.write("---")
 
+# Initialize a click tracker memory for the button session
+if 'ad_clicked' not in st.session_state:
+    st.session_state.ad_clicked = False
+
 # The Link Paste Field Box
 user_link = st.text_input("📋 Paste your Video URL or Google Link here:", placeholder="https://example.com...")
 
@@ -31,6 +35,7 @@ def send_whatsapp_link(video_title, download_url):
 
 # Action Trigger Button
 if st.button("Fetch Download Link ✨", use_container_width=True):
+    st.session_state.ad_clicked = False  # Reset tracker for a fresh URL fetch
     if not user_link:
         st.error("❌ Please paste a valid link first!")
     else:
@@ -46,33 +51,54 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                     st.success(f"🎉 Success! Found: {video_title}")
                     send_whatsapp_link(video_title, direct_download_url)
                     
-                    # ⏱️ THE LIVE 5-SECOND COUNTDOWN CLOCK
-                    countdown_placeholder = st.empty()
-                    for seconds_left in range(5, 0, -1):
-                        countdown_placeholder.info(f"⏳ Generating secure file storage links... Please wait {seconds_left} seconds.")
-                        time.sleep(1)
-                    
-                    countdown_placeholder.empty()
-                    st.success("✅ Secure file link ready below!")
-                    
-                    # 💵 YOUR ADSTERRA SMARTLINK REVENUE LINK
-                    adsterra_money_link = "https://highperformanceformat.com"
-                    
-                    # Native high-performance Markdown link that acts exactly like a button
-                    # When clicked, it passes the direct video download stream, while opening the ad!
-                    st.markdown(
-                        f"""
-                        <div style="text-align:center;">
-                            <a href="{direct_download_url}" target="_blank" onclick="window.open('{adsterra_money_link}', '_blank');" style="text-decoration:none;">
-                                <div style="width:96%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border-none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; display:inline-block; cursor:pointer; text-align:center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
-                                    📥 CLICK HERE TO SAVE / DOWNLOAD FILE
-                                </div>
-                            </a>
-                        </div>
-                        """, 
-                        unsafe_allow_html=True
-                    )
+                    # Store variables in session state to keep them across button clicks
+                    st.session_state.download_url = direct_download_url
+                    st.session_state.ready = True
                 else:
                     st.error("❌ Could not extract a direct file stream from that link.")
             except Exception as e:
                 st.error(f"❌ Extraction Error: Make sure the URL link is valid and public.")
+
+# Render the dynamic single button zone if a video link is ready
+if st.get_attrib('ready') or ('ready' in st.session_state and st.session_state.ready):
+    adsterra_money_link = "https://highperformanceformat.com"
+    
+    st.write("---")
+    
+    # Check if they have clicked to trigger the ad yet
+    if not st.session_state.ad_clicked:
+        # CLICK 1: Act as an ad trigger button to bypass popup blockers cleanly
+        st.markdown(
+            f"""
+            <div style="text-align:center;">
+                <p style="color:#64748b; font-size:13px; margin-bottom:5px;">📥 Your file is compressed and ready for local download.</p>
+                <a href="{adsterra_money_link}" target="_blank" onclick="window.parent.postMessage('ad_done', '*');" style="text-decoration:none;">
+                    <div style="width:96%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; display:inline-block; cursor:pointer;">
+                        📥 CLICK HERE TO SAVE / DOWNLOAD FILE
+                    </div>
+                </a>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+        
+        # Hidden native streamlit detector to seamlessly switch the button states
+        if st.button("🔄 System Synchronization (Click if link doesn't update)", use_container_width=True):
+            st.session_state.ad_clicked = True
+            st.rerun()
+            
+    else:
+        # CLICK 2: Hand them the raw video file direct download link stream!
+        st.markdown(
+            f"""
+            <div style="text-align:center;">
+                <p style="color:#059669; font-weight:bold; font-size:13px; margin-bottom:5px;">✅ Secure server bridge connected successfully!</p>
+                <a href="{st.session_state.download_url}" target="_blank" style="text-decoration:none;">
+                    <div style="width:96%; background:linear-gradient(135deg, #059669 0%, #10b981 100%); color:white; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; display:inline-block; cursor:pointer;">
+                        📥 CLICK AGAIN TO CONFIRM SAVE / DOWNLOAD FILE
+                    </div>
+                </a>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
