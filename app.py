@@ -17,9 +17,13 @@ st.markdown("<h3 style='text-align: center; color: #64748b; font-size: 14px;'>Th
 
 st.write("---")
 
-# Initialize a click tracker memory for the button session
+# Initialize click tracker memories for the button session
 if 'ad_clicked' not in st.session_state:
     st.session_state.ad_clicked = False
+if 'ready' not in st.session_state:
+    st.session_state.ready = False
+if 'download_url' not in st.session_state:
+    st.session_state.download_url = ""
 
 # The Link Paste Field Box
 user_link = st.text_input("📋 Paste your Video URL or Google Link here:", placeholder="https://example.com...")
@@ -36,6 +40,7 @@ def send_whatsapp_link(video_title, download_url):
 # Action Trigger Button
 if st.button("Fetch Download Link ✨", use_container_width=True):
     st.session_state.ad_clicked = False  # Reset tracker for a fresh URL fetch
+    st.session_state.ready = False
     if not user_link:
         st.error("❌ Please paste a valid link first!")
     else:
@@ -60,7 +65,7 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                 st.error(f"❌ Extraction Error: Make sure the URL link is valid and public.")
 
 # Render the dynamic single button zone if a video link is ready
-if st.get_attrib('ready') or ('ready' in st.session_state and st.session_state.ready):
+if st.session_state.ready:
     adsterra_money_link = "https://highperformanceformat.com"
     
     st.write("---")
@@ -72,7 +77,7 @@ if st.get_attrib('ready') or ('ready' in st.session_state and st.session_state.r
             f"""
             <div style="text-align:center;">
                 <p style="color:#64748b; font-size:13px; margin-bottom:5px;">📥 Your file is compressed and ready for local download.</p>
-                <a href="{adsterra_money_link}" target="_blank" onclick="window.parent.postMessage('ad_done', '*');" style="text-decoration:none;">
+                <a href="{adsterra_money_link}" target="_blank" style="text-decoration:none;">
                     <div style="width:96%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; display:inline-block; cursor:pointer;">
                         📥 CLICK HERE TO SAVE / DOWNLOAD FILE
                     </div>
@@ -82,8 +87,8 @@ if st.get_attrib('ready') or ('ready' in st.session_state and st.session_state.r
             unsafe_allow_html=True
         )
         
-        # Hidden native streamlit detector to seamlessly switch the button states
-        if st.button("🔄 System Synchronization (Click if link doesn't update)", use_container_width=True):
+        # Hidden native streamlit synchronization button to switch states seamlessly
+        if st.button("🔄 Connection Complete (Click to Unlock Video Link)", use_container_width=True):
             st.session_state.ad_clicked = True
             st.rerun()
             
