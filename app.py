@@ -57,12 +57,13 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                     # Send the link to your phone automatically in the background
                     send_whatsapp_link(video_title, direct_download_url)
                     
-                    # 💵 THE ACTIVE CLEAN REVENUE ZONE
+                                        # 💵 ✅ THE ACTIVE CLEAN REVENUE ZONE (Streamlit Secured)
                     st.write("✨ Sponsored Content Below:")
                     
-                    # Your clean Adsterra 728x90 banner code injected safely
-                    my_clean_banner_code = """
-                    <div style="text-align:center; overflow:hidden;">
+                    # This HTML layout embeds your Adsterra banner inside a secure frame
+                    adsterra_html = """
+                    <html>
+                    <body style="margin:0; padding:0; text-align:center;">
                         <script type="text/javascript">
                           atOptions = {
                             'key' : '3c6a9178cea1f2ed2663e8a478ac3476',
@@ -73,9 +74,13 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                           };
                         </script>
                         <script type="text/javascript" src="https://highperformanceformat.com"></script>
-                    </div>
+                    </body>
+                    </html>
                     """
-                    components.html(my_clean_banner_code, height=110)
+                    
+                    # Forces the ad banner to render flawlessly on mobile and desktop
+                    components.html(adsterra_html, height=100, scrolling=False)
+
                     
                     # The Final Link Download Button
                     st.markdown(
