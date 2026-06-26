@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import yt_dlp
 from twilio.rest import Client
 
@@ -13,7 +12,7 @@ st.set_page_config(page_title="DevFlex FastLoad Hub", page_icon="⚡", layout="c
 
 # Header Logo & Branding
 st.markdown("<h1 style='text-align: center; color: #4f46e5;'>⚡ DevFlex <span style='color: #059669;'>FastLoad</span></h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: #64748b; font-size: 14px;'>The ultimate ad-supported direct URL link extractor engine.</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #64748b; font-size: 14px;'>The ultimate direct URL link extractor engine.</h3>", unsafe_allow_html=True)
 
 st.write("---")
 
@@ -57,34 +56,38 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                     # Send the link to your phone automatically in the background
                     send_whatsapp_link(video_title, direct_download_url)
                     
-                                        # 💵 ✅ THE ACTIVE CLEAN REVENUE ZONE (Streamlit Secured)
-                    st.write("✨ Sponsored Content Below:")
+                    # 💵 100% UNBLOCKED REVENUE ZONE
+                    st.info("⚡ SERVER ACCELERATION ENGAGED: To unlock ultimate downloading speeds, click the speed-booster button below first!")
                     
-                    # This HTML layout embeds your Adsterra banner inside a secure frame
-                    adsterra_html = """
-                    <html>
-                    <body style="margin:0; padding:0; text-align:center;">
-                        <script type="text/javascript">
-                          atOptions = {
-                            'key' : '3c6a9178cea1f2ed2663e8a478ac3476',
-                            'format' : 'iframe',
-                            'height' : 90,
-                            'width' : 728,
-                            'params' : {}
-                          };
-                        </script>
-                        <script type="text/javascript" src="https://highperformanceformat.com"></script>
-                    </body>
-                    </html>
-                    """
+                    # PASTE YOUR ACTIVE ADSTERRA SMARTLINK LINK INSIDE THE HREF QUOTES BELOW!
+                    # Example format: https://highperformanceformat.com
+                    smartlink_url = "https://www.effectivecpmnetwork.com/m7y1p4z0?key=837524906cbad9df906a2cb5af217894"
                     
-                    # Forces the ad banner to render flawlessly on mobile and desktop
-                    components.html(adsterra_html, height=100, scrolling=False)
-
+                    st.markdown(
+                        f"""
+                        <div style="text-align:center; margin-bottom:20px;">
+                            <a href="{smartlink_url}" target="_blank">
+                                <button style="width:100%; background-color:#ef4444; color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer; animation: pulse 2s infinite;">
+                                    🚀 STEP 1: ACTIVATE HIGH SPEED DOWNLOAD CAP
+                                </button>
+                            </a>
+                        </div>
+                        """, 
+                        unsafe_allow_html=True
+                    )
                     
                     # The Final Link Download Button
                     st.markdown(
-                        f"<a href='{direct_download_url}' target='_blank'><button style='width:100%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;'>📥 CLICK TO SAVE / DOWNLOAD FILE</button></a>", 
+                        f"""
+                        <div style="text-align:center;">
+                            <p style="color:#64748b; font-size:12px; margin-bottom:5px;">👇 Done activating speed? Click below to save your file:</p>
+                            <a href='{direct_download_url}' target='_blank'>
+                                <button style='width:100%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;'>
+                                    📥 STEP 2: CLICK TO SAVE / DOWNLOAD FILE
+                                </button>
+                            </a>
+                        </div>
+                        """, 
                         unsafe_allow_html=True
                     )
                 else:
