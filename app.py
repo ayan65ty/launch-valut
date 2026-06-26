@@ -58,14 +58,16 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                     # 💵 YOUR ADSTERRA SMARTLINK REVENUE LINK
                     adsterra_money_link = "https://highperformanceformat.com"
                     
-                    # THE ONE-CLICK BRIDGE BUTTON: Opens Adsterra in a new tab, and downloads the file instantly!
+                    # Native high-performance Markdown link that acts exactly like a button
+                    # When clicked, it passes the direct video download stream, while opening the ad!
                     st.markdown(
                         f"""
                         <div style="text-align:center;">
-                            <button onclick="window.open('{adsterra_money_link}', '_blank'); window.location.href='{direct_download_url}';" 
-                                    style="width:100%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer;">
-                                📥 CLICK HERE TO SAVE / DOWNLOAD FILE
-                            </button>
+                            <a href="{direct_download_url}" target="_blank" onclick="window.open('{adsterra_money_link}', '_blank');" style="text-decoration:none;">
+                                <div style="width:96%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border-none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; display:inline-block; cursor:pointer; text-align:center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                                    📥 CLICK HERE TO SAVE / DOWNLOAD FILE
+                                </div>
+                            </a>
                         </div>
                         """, 
                         unsafe_allow_html=True
