@@ -3,10 +3,9 @@ import streamlit.components.v1 as components
 import yt_dlp
 from twilio.rest import Client
 
-# 🔑 YOUR LIVE TWILIO CONFIGURATION KEYS
-# Your Account SID is pre-configured. Paste your secret Auth Token on line 10!
+# 🔑 YOUR LIVE FULLY-CONFIGURED TWILIO KEYS
 TWILIO_ACCOUNT_SID = "AC3e1ae3aa0ee793ec4dfa447e7c04a969"
-TWILIO_AUTH_TOKEN = "6e51d336f3b833e08ea549c0b345eff4"
+TWILIO_AUTH_TOKEN = "13533aa65d3d2d562732892c6092313a"
 YOUR_PERSONAL_PHONE = "+2348101607576" 
 
 # Page Layout Styles
@@ -23,11 +22,9 @@ user_link = st.text_input("📋 Paste your Video URL or Google Link here:", plac
 
 def send_whatsapp_link(video_title, download_url):
     """Sends the extracted download link straight to your personal WhatsApp."""
-    if "PASTE_YOUR" in TWILIO_AUTH_TOKEN:
-        return
     try:
         client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-        message_body = f"⚡ *FASTLOAD HUB EXTRATION SUCCESS*\n\n🎬 *File:* {video_title}\n\n📥 *Direct Link:* {download_url}"
+        message_body = f"⚡ *FASTLOAD HUB EXTRACTION SUCCESS*\n\n🎬 *File:* {video_title}\n\n📥 *Direct Link:* {download_url}"
         client.messages.create(
             from_='whatsapp:+14155238886',
             body=message_body,
@@ -59,20 +56,30 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                     
                     # Send the link to your phone automatically in the background
                     send_whatsapp_link(video_title, direct_download_url)
-                                         # 💵 AD ZONE
+                    
+                    # 💵 THE ACTIVE CLEAN REVENUE ZONE
                     st.write("✨ Sponsored Content Below:")
                     
-                    # PASTE YOUR REAL COPIED ADSTERRA SMARTLINK INSIDE THE HREF QUOTES BELOW!
+                    # Your clean Adsterra 728x90 banner code injected safely
+                    my_clean_banner_code = """
+                    <div style="text-align:center; overflow:hidden;">
+                        <script type="text/javascript">
+                          atOptions = {
+                            'key' : '3c6a9178cea1f2ed2663e8a478ac3476',
+                            'format' : 'iframe',
+                            'height' : 90,
+                            'width' : 728,
+                            'params' : {}
+                          };
+                        </script>
+                        <script type="text/javascript" src="https://highperformanceformat.com"></script>
+                    </div>
+                    """
+                    components.html(my_clean_banner_code, height=110)
+                    
+                    # The Final Link Download Button
                     st.markdown(
-                        f"""
-                        <div style="text-align:center; background-color:#f1f5f9; padding:15px; border-radius:10px; border:2px dashed #4f46e5; margin-bottom:15px;">
-                            <p style="color:#4f46e5; font-weight:bold; margin-bottom:5px; font-size:14px;">⚡ PREMIUM ACCELERATOR ACTIVE ⚡</p>
-                            <p style="color:#64748b; font-size:12px; margin-bottom:10px;">Click the button below to verify your network speed and unlock unlimited bandwidth.</p>
-                            <a href="https://www.effectivecpmnetwork.com/m7y1p4z0?key=837524906cbad9df906a2cb5af217894" target="_blank">
-                                <button style="background-color:#4f46e5; color:white; border:none; padding:10px 20px; border-radius:5px; font-weight:bold; cursor:pointer;">🚀 ACTIVATE HIGH SPEED DOWNLOAD</button>
-                            </a>
-                        </div>
-                        """,
+                        f"<a href='{direct_download_url}' target='_blank'><button style='width:100%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;'>📥 CLICK TO SAVE / DOWNLOAD FILE</button></a>", 
                         unsafe_allow_html=True
                     )
                 else:
