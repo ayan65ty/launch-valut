@@ -1,8 +1,9 @@
 import streamlit as st
 import yt_dlp
+import time
 from twilio.rest import Client
 
-# 🔑 YOUR LIVE FULLY-CONFIGURED TWILIO KEYS
+# 🔑 YOUR LIVE TWILIO CONFIGURATION KEYS
 TWILIO_ACCOUNT_SID = "AC3e1ae3aa0ee793ec4dfa447e7c04a969"
 TWILIO_AUTH_TOKEN = "13533aa65d3d2d562732892c6092313a"
 YOUR_PERSONAL_PHONE = "+2348101607576" 
@@ -12,7 +13,7 @@ st.set_page_config(page_title="DevFlex FastLoad Hub", page_icon="⚡", layout="c
 
 # Header Logo & Branding
 st.markdown("<h1 style='text-align: center; color: #4f46e5;'>⚡ DevFlex <span style='color: #059669;'>FastLoad</span></h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: #64748b; font-size: 14px;'>The ultimate direct URL link extractor engine.</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #64748b; font-size: 14px;'>The ultimate high-speed direct link extractor engine.</h3>", unsafe_allow_html=True)
 
 st.write("---")
 
@@ -24,11 +25,7 @@ def send_whatsapp_link(video_title, download_url):
     try:
         client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
         message_body = f"⚡ *FASTLOAD HUB EXTRACTION SUCCESS*\n\n🎬 *File:* {video_title}\n\n📥 *Direct Link:* {download_url}"
-        client.messages.create(
-            from_='whatsapp:+14155238886',
-            body=message_body,
-            to=f'whatsapp:{YOUR_PERSONAL_PHONE}'
-        )
+        client.messages.create(from_='whatsapp:+14155238886', body=message_body, to=f'whatsapp:{YOUR_PERSONAL_PHONE}')
     except Exception as e:
         print(f"Twilio Error: {e}")
 
@@ -39,12 +36,7 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
     else:
         with st.spinner("Extracting direct high-speed data stream links..."):
             try:
-                ydl_opts = {
-                    'format': 'best',
-                    'quiet': True,
-                    'no_warnings': True,
-                }
-                
+                ydl_opts = {'format': 'best', 'quiet': True, 'no_warnings': True}
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     info = ydl.extract_info(user_link, download=False)
                     direct_download_url = info.get('url', None)
@@ -52,23 +44,21 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
 
                 if direct_download_url:
                     st.success(f"🎉 Success! Found: {video_title}")
-                    
-                    # Send the link to your phone automatically in the background
                     send_whatsapp_link(video_title, direct_download_url)
                     
-                    # 💵 100% UNBLOCKED REVENUE ZONE
-                    st.info("⚡ SERVER ACCELERATION ENGAGED: To unlock ultimate downloading speeds, click the speed-booster button below first!")
+                    # 💵 PREMIUM ACCELERATOR HEADER
+                    st.warning("🚀 SERVER SPEED UNCAP: Click the accelerator button below to support our servers and unlock maximum file speeds!")
                     
-                    # PASTE YOUR ACTIVE ADSTERRA SMARTLINK LINK INSIDE THE HREF QUOTES BELOW!
-                    # Example format: https://highperformanceformat.com
-                    smartlink_url = "https://www.effectivecpmnetwork.com/m7y1p4z0?key=837524906cbad9df906a2cb5af217894"
+                    # YOUR ACTIVE SMARTLINK LINK
+                    smartlink_url = "https://highperformanceformat.com" # Replace with your real SmartLink if different
                     
+                    # The Ad Trigger Button
                     st.markdown(
                         f"""
-                        <div style="text-align:center; margin-bottom:20px;">
+                        <div style="text-align:center; margin-bottom:15px;">
                             <a href="{smartlink_url}" target="_blank">
-                                <button style="width:100%; background-color:#ef4444; color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer; animation: pulse 2s infinite;">
-                                    🚀 STEP 1: ACTIVATE HIGH SPEED DOWNLOAD CAP
+                                <button style="width:100%; background-color:#ef4444; color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer;">
+                                    💥 CLICK TO UNCAP DOWNLOAD SPEED (AD)
                                 </button>
                             </a>
                         </div>
@@ -76,14 +66,22 @@ if st.button("Fetch Download Link ✨", use_container_width=True):
                         unsafe_allow_html=True
                     )
                     
-                    # The Final Link Download Button
+                    # ⏱️ THE LIVE 5-SECOND COUNTDOWN CLOCK
+                    countdown_placeholder = st.empty()
+                    for seconds_left in range(5, 0, -1):
+                        countdown_placeholder.info(f"⏳ Generating secure file storage links... Please wait {seconds_left} seconds.")
+                        time.sleep(1)
+                    
+                    # Remove the countdown message and print final download button
+                    countdown_placeholder.empty()
+                    st.success("✅ Secure file link ready below!")
+                    
                     st.markdown(
                         f"""
                         <div style="text-align:center;">
-                            <p style="color:#64748b; font-size:12px; margin-bottom:5px;">👇 Done activating speed? Click below to save your file:</p>
                             <a href='{direct_download_url}' target='_blank'>
                                 <button style='width:100%; background:linear-gradient(135deg, #4f46e5 0%, #059669 100%); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;'>
-                                    📥 STEP 2: CLICK TO SAVE / DOWNLOAD FILE
+                                    📥 CLICK HERE TO SAVE / DOWNLOAD FILE
                                 </button>
                             </a>
                         </div>
